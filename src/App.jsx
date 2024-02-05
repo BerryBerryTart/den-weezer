@@ -1,7 +1,7 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import './App.css';
 
-import { Stage } from "./components/Stage";
+import { Stage } from './components/Stage';
 
 function App() {
   return (

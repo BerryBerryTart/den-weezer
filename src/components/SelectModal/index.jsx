@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import "./style.less";
-import CLOSE_ICON from "../../assets/close.svg";
+import React, { useState, useEffect } from 'react';
+import './style.less';
+import CLOSE_ICON from '../../assets/close.svg';
 
-export const SelectModal = (props) => {
+export const SelectModal = props => {
   const { assets, handleClose } = props;
   const [icons, setIcons] = useState([]);
 
-  const handleClick = (asset) => {
+  const handleClick = asset => {
     handleClose(asset);
   };
 
@@ -20,7 +20,7 @@ export const SelectModal = (props) => {
             className="select-icon"
             src={assets[i].icon}
             key={i}
-          ></img>
+          ></img>,
         );
       }
       setIcons(iconbuff);

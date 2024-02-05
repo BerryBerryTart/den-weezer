@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { getAllAssets, getRandomIndex } from "../util/utils";
-import "./style.less";
-import { SelectModal } from "../SelectModal";
+import React, { useState, useEffect } from 'react';
+import { getAllAssets, getRandomIndex } from '../util/utils';
+import './style.less';
+import { SelectModal } from '../SelectModal';
 
 export const Stage = () => {
   const assets = getAllAssets();
   const [showSelect, setShowSelect] = useState(false);
   const [editPos, setEditPos] = useState(null);
-  const [place1, setPlace1] = useState("");
-  const [place2, setPlace2] = useState("");
-  const [place3, setPlace3] = useState("");
-  const [place4, setPlace4] = useState("");
+  const [place1, setPlace1] = useState('');
+  const [place2, setPlace2] = useState('');
+  const [place3, setPlace3] = useState('');
+  const [place4, setPlace4] = useState('');
 
-  const handleClick = (pos) => {
+  const handleClick = pos => {
     setEditPos(pos);
     setShowSelect(true);
   };
 
-  const handleModalClose = (assetToChange) => {
+  const handleModalClose = assetToChange => {
     console.log(`CHANGING ${editPos} TO ${assetToChange}`);
     if (assetToChange) {
       switch (editPos) {
