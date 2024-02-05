@@ -1,0 +1,33 @@
+#stage-container {
+  display: flex;
+  align-items: end;
+  width: 100vw;
+  height: 100vh;
+}
+
+#main-stage {
+  --container-height: min(800px, 80vh);
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 100vw;
+  height: var(--container-height);;
+  overflow: hidden;
+  .stage-spot {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    width: 400px;
+    height: var(--container-height);
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    .stage-img {
+      max-width: 400px;
+      max-height: var(--container-height);
+      position: fixed;
+      bottom: 0px;
+      object-fit: contain;
+    }
+  }
+}
