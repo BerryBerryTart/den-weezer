@@ -26,7 +26,3 @@ export const getAllAssets = () => {
 
   return obj;
 };
-
-export const getRandomIndex = assets => {
-  return Math.floor(Math.random() * assets.length);
-};

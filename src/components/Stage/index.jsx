@@ -1,57 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { getAllAssets, getRandomIndex } from '../util/utils';
-import './style.less';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { SelectModal } from '../SelectModal';
+import {
+  handleSelectModal,
+  setPlaceSelector,
+  initialiseStage,
+} from '../../redux/stageSlice';
+import './style.less';
 
 export const Stage = () => {
-  const assets = getAllAssets();
-  const [showSelect, setShowSelect] = useState(false);
-  const [editPos, setEditPos] = useState(null);
-  const [place1, setPlace1] = useState('');
-  const [place2, setPlace2] = useState('');
-  const [place3, setPlace3] = useState('');
-  const [place4, setPlace4] = useState('');
+  const showSelect = useSelector(state => state.stage.showSelect);
+  const place1 = useSelector(state => state.stage.place1);
+  const place2 = useSelector(state => state.stage.place2);
+  const place3 = useSelector(state => state.stage.place3);
+  const place4 = useSelector(state => state.stage.place4);
+  const dispatch = useDispatch();
 
   const handleClick = pos => {
-    setEditPos(pos);
-    setShowSelect(true);
+    dispatch(setPlaceSelector(pos));
+    dispatch(handleSelectModal(true));
   };
 
-  const handleModalClose = assetToChange => {
-    console.log(`CHANGING ${editPos} TO ${assetToChange}`);
-    if (assetToChange) {
-      switch (editPos) {
-        case 1:
-          setPlace1(assetToChange);
-          break;
-        case 2:
-          setPlace2(assetToChange);
-          break;
-        case 3:
-          setPlace3(assetToChange);
-          break;
-        case 4:
-          setPlace4(assetToChange);
-          break;
-      }
-    }
-    setEditPos(null);
-    setShowSelect(false);
-  };
-
-  //first load
   useEffect(() => {
-    setPlace1(assets.assets[getRandomIndex(assets.assets)].profile);
-    setPlace2(assets.assets[getRandomIndex(assets.assets)].profile);
-    setPlace3(assets.assets[getRandomIndex(assets.assets)].profile);
-    setPlace4(assets.assets[getRandomIndex(assets.assets)].profile);
+    dispatch(initialiseStage());
   }, []);
 
   return (
     <>
-      {showSelect && (
-        <SelectModal assets={assets.assets} handleClose={handleModalClose} />
-      )}
+      {showSelect && <SelectModal />}
       <div id="stage-container">
         <div id="main-stage">
           <div className="stage-spot" onClick={() => handleClick(1)}>

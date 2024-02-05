@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { handlePlaceChange, handleSelectModal } from '../../redux/stageSlice';
 import './style.less';
 import CLOSE_ICON from '../../assets/close.svg';
 
-export const SelectModal = props => {
-  const { assets, handleClose } = props;
+export const SelectModal = () => {
+  const assets = useSelector(state => state.stage.assets.assets);
   const [icons, setIcons] = useState([]);
-
-  const handleClick = asset => {
-    handleClose(asset);
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (assets) {
@@ -16,7 +15,7 @@ export const SelectModal = props => {
       for (let i = 0; i < assets.length; i++) {
         iconbuff.push(
           <img
-            onClick={() => handleClick(assets[i].profile)}
+            onClick={() => dispatch(handlePlaceChange(assets[i].profile))}
             className="select-icon"
             src={assets[i].icon}
             key={i}
@@ -35,7 +34,7 @@ export const SelectModal = props => {
           <img
             id="close-modal"
             src={CLOSE_ICON}
-            onClick={() => handleClose(null)}
+            onClick={() => dispatch(handleSelectModal(false))}
           />
         </div>
         <div id="select-modal-body">
